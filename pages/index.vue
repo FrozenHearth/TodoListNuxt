@@ -1,39 +1,40 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        todolistnuxt
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="container is-flex-direction-column">
+    <h1 class="title">
+      Todo
+    </h1>
+    <TodoInput @addedTodo="addedTodo" />
+    <TodoLists :todos="todos" />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
+import TodoLists from "~/components/todos/TodoLists.vue";
 
-export default Vue.extend({})
+export default Vue.extend({
+  components: { TodoLists },
+  data() {
+    return {
+      todos: Array()
+    };
+  },
+  methods: {
+    addedTodo(todos: Array<any>) {
+      this.todos = todos;
+    }
+  }
+});
 </script>
 
 <style>
+body {
+  background-color: #f5f5f5;
+}
+* {
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -44,32 +45,10 @@ export default Vue.extend({})
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
   color: #35495e;
   letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
