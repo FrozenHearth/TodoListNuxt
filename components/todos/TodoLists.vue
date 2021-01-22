@@ -1,6 +1,6 @@
 <template>
   <div class="column is-half">
-    <div v-for="(todo, idx) in todos" :key="idx">
+    <div v-for="(todo, idx) in allTodos" :key="idx">
       <div class="todo-item is-flex">
         <input @change="toggleComplete(idx)" type="checkbox" class="toggle" />
         <label
@@ -15,16 +15,28 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
+<script>
+export default {
   props: ["todos"],
+  data() {
+    return {
+      allTodos: []
+    };
+  },
+  created() {
+    this.allTodos = JSON.parse(localStorage.getItem("todoList")) || [];
+  },
+  watch: {
+    todos() {
+      this.allTodos = JSON.parse(localStorage.getItem("todoList")) || [];
+    }
+  },
   methods: {
-    toggleComplete(idx: number) {
-      this.todos[idx].isCompleted = !this.todos[idx].isCompleted;
+    toggleComplete(idx) {
+      this.allTodos[idx].isCompleted = !this.allTodos[idx].isCompleted;
     }
   }
-});
+};
 </script>
 
 <style></style>

@@ -13,13 +13,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-
-export default Vue.extend({
+<script>
+export default {
   data() {
     return {
-      todos: Array(),
+      todos: [],
       todo: {
         title: "",
         isCompleted: false
@@ -29,6 +27,8 @@ export default Vue.extend({
   methods: {
     createTodo() {
       this.todos.push(this.todo);
+      localStorage.setItem("todoList", JSON.stringify(this.todos));
+      this.todos = JSON.parse(localStorage.getItem("todoList"));
       this.$emit("addedTodo", this.todos);
       this.todo = {
         title: "",
@@ -36,7 +36,7 @@ export default Vue.extend({
       };
     }
   }
-});
+};
 </script>
 
 <style></style>
