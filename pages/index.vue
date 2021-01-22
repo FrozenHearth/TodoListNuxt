@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
 import TodoLists from "~/components/todos/TodoLists.vue";
 
@@ -16,11 +16,11 @@ export default Vue.extend({
   components: { TodoLists },
   data() {
     return {
-      todos: Array()
+      todos: []
     };
   },
   methods: {
-    addedTodo(todos: Array<any>) {
+    addedTodo(todos) {
       this.todos = todos;
     }
   }
